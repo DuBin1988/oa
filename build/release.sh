@@ -14,6 +14,9 @@ then
   # e2e
   npm run e2e 2>/dev/null
 
+  #build
+  npm run build
+  
   # commit
   git add -A
   git commit -m "[build] $VERSION"
