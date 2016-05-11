@@ -1,54 +1,32 @@
 <template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <list :model="data">
-      <span partial>{{data.name}}</span>
-    </list>
-    <hello></hello>
+  <div id="app" style="height: 100%;">
+    <!--head-->
+    <div style="background-color: black; height: 5%;">
+      head
+    </div>
+    <!--main-->
+    <div style="background-color: black; height: 90%;">
+      <tabset style="width: 90%; margin:0 auto;">
+        <tab header="项目管理">
+          测试1
+        </tab>
+        <tab header="任务管理">
+          测试2
+        </tab>
+      </tabset>
+    </div>
+    <!--foot-->
+    <div style="background-color: black; height: 5%;">
+      foot
+    </div>
   </div>
 </template>
 
 <script>
-import { List } from 'vue-client'
-import Hello from './components/Hello'
+import Tabset from 'vue-strap/src/Tabset'
+import Tab from 'vue-strap/src/Tab'
 
 export default {
-  data () {
-    return {
-      data: [
-        {name: 'a'},
-        {name: 'b'}
-      ]
-    }
-  },
-  components: {
-    Hello,
-    List
-  }
+  components: { Tabset, Tab }
 }
 </script>
-
-<style>
-html {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#app {
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Helvetica, sans-serif;
-  text-align: center;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
-}
-</style>

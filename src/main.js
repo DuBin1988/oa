@@ -3,6 +3,7 @@ import App from './App'
 import { all } from 'vue-client'
 
 all()
+require('./bootstrap/less/bootstrap.less')
 
 /* eslint-disable no-new */
 new Vue({
