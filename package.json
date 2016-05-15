@@ -65,6 +65,7 @@
     "rimraf": "^2.5.0",
     "selenium-server": "2.52.0",
     "url-loader": "^0.5.7",
+    "vue-client": "^1.0.5",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^8.2.1",

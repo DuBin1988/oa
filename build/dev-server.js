@@ -2,9 +2,11 @@ var express = require('express')
 var webpack = require('webpack')
 var config = require('./webpack.dev.conf')
 var proxyMiddleware = require('http-proxy-middleware')
+var httpProxy = require('http-proxy')
 
 var app = express()
 var compiler = webpack(config)
+var proxy = httpProxy.createProxyServer()
 
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
@@ -56,6 +58,12 @@ app.use(hotMiddleware)
 
 // serve pure static assets
 app.use('/static', express.static('./static'))
+
+app.all('/rs/*', function (req, res) {
+  proxy.web(req, res, {
+    target: 'http://localhost:8081'
+  })
+})
 
 module.exports = app.listen(8080, function (err) {
   if (err) {

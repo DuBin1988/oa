@@ -1,32 +1,36 @@
 <template>
-  <div id="app" style="height: 100%;">
-    <!--head-->
-    <div style="background-color: black; height: 5%;">
-      head
-    </div>
-    <!--main-->
-    <div style="background-color: black; height: 90%;">
-      <tabset style="width: 90%; margin:0 auto;">
-        <tab header="项目管理">
-          测试1
-        </tab>
-        <tab header="任务管理">
-          测试2
-        </tab>
-      </tabset>
-    </div>
-    <!--foot-->
-    <div style="background-color: black; height: 5%;">
-      foot
-    </div>
+  <div id="app" class='full'>
+    <app-base>
+      <div class='flex'>
+        <!--head-->
+        <div>
+          欢迎使用奥枫OA系统！
+        </div>
+        <!--main-->
+        <div class='span'>
+          <tabset>
+            <tab header='项目管理'>
+              <project-page></project-page>
+            </tab>
+            <tab header='任务管理'>
+            </tab>
+          </tabset>
+        </div>
+        <!--foot-->
+        <div>
+          版本号：V0.0.1
+        </div>
+      </div>
+    </app-base>
   </div>
 </template>
 
 <script>
 import Tabset from 'vue-strap/src/Tabset'
 import Tab from 'vue-strap/src/Tab'
+import ProjectPage from './project/ProjectPage'
 
 export default {
-  components: { Tabset, Tab }
+  components: { Tab, ProjectPage, Tabset }
 }
 </script>
