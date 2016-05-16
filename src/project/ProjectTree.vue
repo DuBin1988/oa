@@ -1,7 +1,7 @@
 <template>
   <div class='flex'>
     <div class='span'>
-      <criteria-paged :model="model" :pager='false'>
+      <criteria-paged :model="model" :pager='false' @select-changed='select'>
         <criteria partial='criteria' @condition-changed='search'>
           <span partial>
             <div>
@@ -35,9 +35,24 @@ export default {
       model: new TreeList('/rs/sql/project.sql')
     }
   },
+  computed: {
+    state () {
+      // 一直向上找store
+      let parent = this
+      while (parent && !parent.store) {
+        parent = parent.$parent
+      }
+      if (parent.store) {
+        return parent.store
+      }
+    }
+  },
   methods: {
     search () {
       this.model.search('1=1', {})
+    },
+    select (args) {
+      this.state.select(args.val)
     }
   }
 }

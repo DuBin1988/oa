@@ -1,38 +1,27 @@
 <template>
-  <div id='project-page' class='container full'>
-    <div class="row full">
-      <div class="col-md-4 full">
-        <project-tree :select-store='selectStore'></project-tree>
-      </div>
-      <div class="col-md-8 full">
-        <!--flex-->
-        <div class='flex'>
-          <!--head-->
-          <div>
-            <project-form :project='selectStore.selected'></project-form>
-          </div>
-          <!--main-->
-          <div class='span'>
-            <project-task :project='selectStore.selected'></project-task>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div id='project-page' class='full'>
+    <project-home v-show='currentView === "ProjectHome"' @route='route'></project-home>
+    <task-form v-if='currentView === "TaskForm"' @route='route'></task-form>
   </div>
 </template>
 
 <script>
-import { SelectStore } from 'vue-client'
-import ProjectTree from './ProjectTree'
-import ProjectForm from './ProjectForm'
-import ProjectTask from './ProjectTask'
+import ProjectHome from './ProjectHome'
+import TaskForm from './TaskForm'
+import State from './State'
 
 export default {
   data () {
     return {
-      selectStore: new SelectStore()
+      currentView: 'ProjectHome',
+      store: new State()
     }
   },
-  components: { ProjectTree, ProjectForm, ProjectTask }
+  methods: {
+    route (comp) {
+      this.currentView = comp
+    }
+  },
+  components: { ProjectHome, TaskForm }
 }
 </script>

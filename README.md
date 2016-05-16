@@ -2,26 +2,11 @@
 
 > oa
 
-## Build Setup
+## 组件列表
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For detailed explanation on how things work, checkout the [guide](https://github.com/vuejs-templates/webpack#vue-webpack-boilerplate) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- project：与项目相关组件
+  * ProjectPage：项目管理主页面
+  * ProjectTree：左侧项目树
+  * ProjectForm：右上项目表单
+  * ProjectTask：右下项目任务列表
+  * TaskForm：给项目增加任务表单

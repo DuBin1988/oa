@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div id='ProjectTask' class='full'>
     {{project ? project.name : '请选择项目'}}
-    <button>新增</button>
-    <criteria-paged :model="model" :pager='false'>
-      <criteria partial='criteria' @condition-changed='search'>
+    <button @click='route("TaskForm")'>新增</button>
+    <criteria-paged :model="model" :pager='false' @condition-changed='search'>
+      <criteria partial='criteria'>
         <span partial>
           <div>
             名称:
@@ -33,14 +33,33 @@
 </template>
 
 <script>
-import { PagedList } from 'vue-client'
+import { TreeList } from 'vue-client'
 
 export default {
   data () {
     return {
-      model: new PagedList('/rs/sql/task.sql', 20)
+      model: new TreeList('/rs/sql/task.sql')
     }
   },
-  props: ['project']
+  computed: {
+    state () {
+      // 一直向上找store
+      let parent = this
+      while (parent && !parent.store) {
+        parent = parent.$parent
+      }
+      if (parent.store) {
+        return parent.store
+      }
+    }
+  },
+  methods: {
+    search (args) {
+      this.model.search(args.condition, {projectid: this.state.selected.id})
+    },
+    route (comp) {
+      this.$dispatch('route', comp)
+    }
+  }
 }
 </script>
