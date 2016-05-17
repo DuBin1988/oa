@@ -2,11 +2,13 @@
   <div id='project-page' class='full'>
     <project-home v-show='currentView === "ProjectHome"' @route='route'></project-home>
     <task-form v-if='currentView === "TaskForm"' @route='route'></task-form>
+    <project-form v-if='currentView === "ProjectForm"' @route='route'></project-form>
   </div>
 </template>
 
 <script>
 import ProjectHome from './ProjectHome'
+import ProjectForm from './ProjectForm'
 import TaskForm from './TaskForm'
 import State from './State'
 
@@ -14,7 +16,7 @@ export default {
   data () {
     return {
       currentView: 'ProjectHome',
-      store: new State()
+      state: new State()
     }
   },
   methods: {
@@ -22,6 +24,6 @@ export default {
       this.currentView = comp
     }
   },
-  components: { ProjectHome, TaskForm }
+  components: { ProjectHome, ProjectForm, TaskForm }
 }
 </script>

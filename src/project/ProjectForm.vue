@@ -1,57 +1,39 @@
 <template>
   <div>
-    添加子 父节点id：{{subForm.parentid}}
-    <validator name='vSub'>
-      <form novalidate v-on:submit.prevent="$post('/rs/entity/t_project', subForm)">
-        <div>
-          用户名:
-          <input type="text" v-model="subForm.name" v-validate:name='{ required: true }'>
-          <span v-if="$vSub.name.required">不能为空</span>
-        </div>
-        <div>
-          <button v-if='$vSub.valid'>保存</button>
-        </div>
-      </form>
-    </validator>
-    添加根
     <validator name='v'>
-      <form novalidatev @submit.prevent='test'>
+      <form novalidate>
         <div>
-          用户名:
-          <input type="text" v-model="form.name" v-validate:name='{ required: true }'>
+          名称:
+          <input type="text" v-model="model.name" v-validate:name='{ required: true }'>
           <span v-if="$v.name.required">不能为空</span>
         </div>
-        <div>
-          <button v-if='$v.valid' @click.stop="$post('/rs/entity/t_project', form)">保存</button>
-        </div>
-    </form>
-  </validator>
-  </dv>
+      </form>
+      <button v-if='$v.valid' @click="confirm()">保存</button>
+      <button @click='$route("ProjectHome")'>返回</button>
+    </validator>
+  </div>
 </template>
 
 <script>
+import co from 'co'
+
+let saveGen = function * (comp) {
+  yield comp.$post('/rs/entity/t_project', comp.model)
+  // 刷新项目树，反映最新变化
+  yield comp.$state.projects.refresh()
+  comp.$route('ProjectHome')
+}
+
 export default {
-  props: ['parent'],
   data () {
     return {
-      subForm: {
-        parentid: null,
-        name: ''
-      },
-      form: {
-        name: ''
-      }
-    }
-  },
-  watch: {
-    'parent': function (val, oldVal) {
-      let parentid = val ? val.id : null
-      this.subForm.parentid = parentid
+      model: {}
     }
   },
   methods: {
-    test () {
-      return false
+    confirm () {
+      let gen = saveGen(this)
+      return co(gen)
     }
   }
 }

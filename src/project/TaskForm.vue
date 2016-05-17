@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>给项目添加新任务：{{state.selected.name}}</p>
+    <p>给项目添加新任务：{{$state.selected.name}}</p>
     <validator name='v'>
       <form novalidate>
         <div>
@@ -10,7 +10,7 @@
         </div>
       </form>
       <button v-if='$v.valid' @click="confirm()">保存</button>
-      <button @click='route("ProjectHome")'>返回</button>
+      <button @click='$route("ProjectHome")'>返回</button>
     </validator>
   </div>
 </template>
@@ -22,26 +22,11 @@ export default {
       model: {}
     }
   },
-  computed: {
-    state () {
-      // 一直向上找store
-      let parent = this
-      while (parent && !parent.store) {
-        parent = parent.$parent
-      }
-      if (parent.store) {
-        return parent.store
-      }
-    }
-  },
   methods: {
     confirm () {
-      this.model.projectid = this.state.selected.id
+      this.model.projectid = this.$state.selected.id
       this.$post('/rs/entity/t_task', this.model)
-      this.route('ProjectHome')
-    },
-    route (comp) {
-      this.$dispatch('route', comp)
+      this.$route('ProjectHome')
     }
   }
 }

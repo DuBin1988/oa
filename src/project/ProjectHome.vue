@@ -5,17 +5,7 @@
         <project-tree :select-store='selectStore'></project-tree>
       </div>
       <div class="col-md-8 full">
-        <!--flex-->
-        <div class='flex'>
-          <!--head-->
-          <div>
-            <project-form></project-form>
-          </div>
-          <!--main-->
-          <div class='span'>
-            <project-task></project-task>
-          </div>
-        </div>
+        <project-task></project-task>
       </div>
     </div>
   </div>
