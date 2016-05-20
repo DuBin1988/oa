@@ -1,10 +1,10 @@
 <template>
-  <div id='project-page' class='container full'>
-    <div class="row full">
-      <div class="col-md-4 full">
+  <div id='project-page' class='container'>
+    <div class="row">
+      <div class="col-md-4">
         <project-tree :select-store='selectStore'></project-tree>
       </div>
-      <div class="col-md-8 full">
+      <div class="col-md-8">
         <project-task></project-task>
       </div>
     </div>

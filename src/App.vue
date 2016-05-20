@@ -1,28 +1,26 @@
 <template>
-  <div id="app" class='full'>
-    <app-base>
-      <div class='flex'>
-        <!--head-->
-        <div>
-          欢迎使用奥枫OA系统！
-        </div>
-        <!--main-->
-        <div class='span'>
-          <tabset>
-            <tab header='项目管理'>
-              <project-page></project-page>
-            </tab>
-            <tab header='任务管理'>
-            </tab>
-          </tabset>
-        </div>
-        <!--foot-->
-        <div>
-          版本号：V0.0.1
-        </div>
-      </div>
-    </app-base>
-  </div>
+  <app-base>
+    <div class='flex'>
+      <!--head-->
+      <header>
+        欢迎使用奥枫OA系统！
+      </header>
+      <!--main-->
+      <article class='span'>
+        <tabset>
+          <tab header='项目管理'>
+            <project-page></project-page>
+          </tab>
+          <tab header='任务管理'>
+          </tab>
+        </tabset>
+      </article>
+      <!--foot-->
+      <footer>
+        版本号：V0.0.2
+      </footer>
+    </div>
+  </app-base>
 </template>
 
 <script>

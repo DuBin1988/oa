@@ -9,7 +9,7 @@
         </div>
       </form>
       <button v-if='$v.valid' @click="confirm()">保存</button>
-      <button @click='$route("ProjectHome")'>返回</button>
+      <button @click='$back()'>返回</button>
     </validator>
   </div>
 </template>

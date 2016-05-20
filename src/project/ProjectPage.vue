@@ -1,8 +1,6 @@
 <template>
-  <div id='project-page' class='full'>
-    <project-home v-show='currentView === "ProjectHome"' @route='route'></project-home>
-    <task-form v-if='currentView === "TaskForm"' @route='route'></task-form>
-    <project-form v-if='currentView === "ProjectForm"' @route='route'></project-form>
+  <div>
+    <route v-ref:route></route>
   </div>
 </template>
 
@@ -15,14 +13,11 @@ import State from './State'
 export default {
   data () {
     return {
-      currentView: 'ProjectHome',
       state: new State()
     }
   },
-  methods: {
-    route (comp) {
-      this.currentView = comp
-    }
+  ready () {
+    this.$refs.route.route('项目管理', 'ProjectHome')
   },
   components: { ProjectHome, ProjectForm, TaskForm }
 }

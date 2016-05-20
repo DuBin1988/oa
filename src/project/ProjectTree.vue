@@ -1,10 +1,10 @@
 <template>
   <div class='flex panel panel-primary'>
-    <div class="panel-heading">
+    <header class="panel-heading">
       <span class="h3 panel-title">项目树</span>
-      <button class='btn btn-primary pull-right' @click="$route('ProjectForm')">新增项目</button>
-    </div>
-    <div class='span panel-body'>
+      <button class='btn btn-primary pull-right' @click="$route('项目编辑', 'ProjectForm')">新增项目</button>
+    </header>
+    <article class='span panel-body'>
       <criteria-paged :model="model" :pager='false' @select-changed='select'>
         <criteria partial='criteria' @condition-changed='search'>
           <div novalidate class="form-inline" partial>
@@ -24,10 +24,10 @@
           </span>
         </tree>
       </criteria-paged>
-    </div>
-    <div class='panel-footer'>
+    </article>
+    <footer class='panel-footer'>
       共{{model.rows.length}}项
-    </div>
+    </footer>
   </div>
 </template>
 

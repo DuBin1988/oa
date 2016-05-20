@@ -1,11 +1,11 @@
 <template>
-  <div id='ProjectTask' class='full panel panel-primary'>
-    <div class="panel-heading">
+  <div id='ProjectTask' class='flex panel panel-primary'>
+    <header class="panel-heading">
       <span class="panel-title">项目任务表</span>
       <span v-show='!$state.selected' class='pull-right'>请选择项目！</span>
-      <button v-show='$state.selected' class='btn btn-primary pull-right' @click='$route("TaskForm")'>新增任务</button>
-    </div>
-    <div v-show='$state.selected' class='panel-body'>
+      <button v-show='$state.selected' class='btn btn-primary pull-right' @click='$route("任务编写", "TaskForm")'>新增任务</button>
+    </header>
+    <article v-show='$state.selected' class='span panel-body'>
       <criteria-paged :model="model" :pager='false' @condition-changed='search'>
         <criteria partial='criteria'>
           <div partial>
@@ -18,11 +18,17 @@
         <grid-tree :model="model.rows" url='rs/sql/subtask.sql' partial='list'>
           <template partial='head'>
             <tr>
-              <th>姓名</th>
+              <th>名称</th>
+              <th>内容</th>
+              <th>执行人</th>
+              <th>时间</th>
               <th>操作</th>
             </tr>
           </template>
           <template partial='body'>
+            <td>{{row.content}}</td>
+            <td>{{row.actor}}</td>
+            <td>{{row.musttime}}</td>
             <td v-bind:class="{ 'selected': isSelected(row) }">
               <button v-if='isSelected(row)' @click='remove("rs/entity/t_task", row)'>x</button>
             </td>
@@ -30,10 +36,10 @@
           <span partial>{{row.name}}</span>
         </grid-tree>
       </criteria-paged>
-    </div>
-    <div v-show='$state.selected' class='panel-footer'>
-      <p>共{{model.rows.length}}项</p>
-    </div>
+    </article>
+    <footer v-show='$state.selected' class='panel-footer'>
+      共{{model.rows.length}}项
+    </footer>
   </div>
 </template>
 
