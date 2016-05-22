@@ -24,3 +24,14 @@
 - parent参数：有parent参数，添加子任务，否则，添加根任务。
 - source参数：有source参数，对source传过来的对象进行编辑，否则，添加新对象。
 - project参数：有projet参数，给project添加任务，否则，任务与项目无关。
+
+## DispatchForm
+
+任务派发组件，把某个任务派发出去，派发时，填写任务处理方案。支持如下特性：
+
+- task参数：需要派发的任务
+- 保存任务派发记录。
+
+## DispatchList
+
+显示任务分派过程。
