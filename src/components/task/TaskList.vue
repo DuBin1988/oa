@@ -2,10 +2,9 @@
   <div id='ProjectTask' class='flex panel panel-primary'>
     <header class="panel-heading">
       <span class="panel-title">项目任务表</span>
-      <span v-show='!$state.selected' class='pull-right'>请选择项目！</span>
-      <button v-show='$state.selected' class='btn btn-primary pull-right' @click='$route("任务编写", "TaskForm")'>新增任务</button>
+      <button class='btn btn-primary pull-right' @click='$route("task-form")'>新增任务</button>
     </header>
-    <article v-show='$state.selected' class='span panel-body'>
+    <article class='span panel-body'>
       <criteria-paged :model="model" :pager='false' @condition-changed='search'>
         <criteria partial='criteria'>
           <div partial>
@@ -37,7 +36,7 @@
         </grid-tree>
       </criteria-paged>
     </article>
-    <footer v-show='$state.selected' class='panel-footer'>
+    <footer class='panel-footer'>
       共{{model.rows.length}}项
     </footer>
   </div>
@@ -47,6 +46,7 @@
 import { TreeList } from 'vue-client'
 
 export default {
+  title: '任务管理',
   data () {
     return {
       model: new TreeList('/rs/sql/task.sql')
@@ -55,9 +55,6 @@ export default {
   methods: {
     search (args) {
       this.model.search(args.condition, {projectid: this.$state.selected.id})
-    },
-    route (comp) {
-      this.$dispatch('route', comp)
     }
   }
 }

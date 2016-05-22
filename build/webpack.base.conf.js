@@ -33,6 +33,7 @@ module.exports = {
         include: [
           `${projectRoot}\\src`,
           `${projectRoot}\\build`,
+          `${projectRoot}\\examples`,
           `${projectRoot}\\test`,
           `${projectRoot}\\node_modules\\vue-client\\src`,
           `${projectRoot}\\node_modules\\vue-strap\\src`
@@ -66,6 +67,7 @@ module.exports = {
       extract: false
     })
   },
+  plugins: [],
   eslint: {
     formatter: require('eslint-friendly-formatter')
   }

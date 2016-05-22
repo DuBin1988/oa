@@ -2,10 +2,9 @@
   <div class='flex panel panel-primary'>
     <header class="panel-heading">
       <span class="h3 panel-title">项目树</span>
-      <button class='btn btn-primary pull-right' @click="$route('项目编辑', 'ProjectForm')">新增项目</button>
+      <button class='btn btn-primary pull-right' @click="$route('project-form')">新增项目</button>
     </header>
     <article class='span panel-body'>
-      <criteria-paged :model="model" :pager='false' @select-changed='select'>
         <criteria partial='criteria' @condition-changed='search'>
           <div novalidate class="form-inline" partial>
             <div class="form-group">
@@ -17,13 +16,12 @@
             <button class="btn btn-default" @click="search()">查询</button>
           </div>
         </criteria>
-        <tree :model="model.rows" url='rs/sql/subproject.sql' partial="list">
+        <tree :model="model.rows" url='rs/sql/subproject.sql' partial="list" v-ref:tree>
           <span partial>
             {{ row.name }}
             <button class="badge pull-right" v-if='isSelected(row)' @click='remove("rs/entity/t_project", row)'>x</button>
           </span>
         </tree>
-      </criteria-paged>
     </article>
     <footer class='panel-footer'>
       共{{model.rows.length}}项
@@ -32,18 +30,22 @@
 </template>
 
 <script>
+import { TreeList } from 'vue-client'
+
 export default {
+  data () {
+    return {
+      model: new TreeList('/rs/sql/project.sql')
+    }
+  },
   computed: {
-    model () {
-      return this.$state.projects
+    selected () {
+      return this.$refs.tree.selected
     }
   },
   methods: {
     search () {
       this.model.search('1=1', {})
-    },
-    select (args) {
-      this.$state.select(args.val)
     }
   }
 }

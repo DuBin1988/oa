@@ -1,9 +1,23 @@
 # Project
 
-对项进行管理，包含组件：
+对项目进行管理，包含组件：
 
-- ProjectPage：功能页面，对路由进行调度。
-- ProjectHome：功能初始页面。
-- ProjectTree：左边功能树。
-- ProjectTask：右边的任务树。
-- ProjectForm：项目编辑页面，用于增加新项目。
+- Project：项目管理主页面，左边项目列表，右边任务列表。
+- ProjectList：项目列表
+- [TaskList](./Task.md)：任务列表
+- ProjectForm：项目编辑页面，用于增加或者编辑新项目。
+
+## ProjectList
+
+项目列表组件，以树状方式显示项目列表，自己包含选择内容。可以进行如下操作：
+
+- 增加新项目：增加新的项目。
+- 增加子项目：在当前选中的项目下，增加子项目。
+- 删除项目：删除当前选中项目。
+
+## ProjectForm
+
+项目编辑组件，支持如下特性：
+
+- parent参数：有parent参数，添加子项目，否则，添加根项目。
+- source参数：有source参数，对source传过来的对象进行编辑，否则，添加新对象。
