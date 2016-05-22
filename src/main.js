@@ -12,6 +12,10 @@ Vue.component('functions', (resolve) => { require(['./components/Functions'], re
 Vue.component('project', (resolve) => { require(['./components/project/Project'], resolve) })
 Vue.component('project-form', (resolve) => { require(['./components/project/ProjectForm'], resolve) })
 
+// task
+Vue.component('task-list', (resolve) => { require(['./components/task/TaskList'], resolve) })
+Vue.component('dispatch-form', (resolve) => { require(['./components/task/DispatchForm'], resolve) })
+
 /* eslint-disable no-new */
 new Vue({
   el: 'body',

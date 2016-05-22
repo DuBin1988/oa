@@ -5,6 +5,7 @@
   "author": "何宁社 <524395609@qq.com>",
   "private": true,
   "scripts": {
+    "example": "node build/example-server.js",
     "dev": "node build/dev-server.js",
     "lint": "eslint src/**.js test/e2e/**.js test/unit/specs/** build/**.js",
     "build": "rimraf dist && mkdirp dist && ncp static dist/static && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.conf.js",

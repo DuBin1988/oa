@@ -2,10 +2,10 @@
   <div id='project-page' class='container'>
     <div class="row">
       <div class="col-md-4">
-        <project-list></project-list>
+        <project-list v-ref:project></project-list>
       </div>
       <div class="col-md-8">
-        <task-list></task-list>
+        <task-list :project='$refs.project.selected'></task-list>
       </div>
     </div>
   </div>
