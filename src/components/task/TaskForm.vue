@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>给项目添加新任务：{{$state.selected.name}}</p>
     <validator name='v'>
       <form novalidate>
         <div class="form-group">
@@ -47,9 +46,21 @@ export default {
       model: {}
     }
   },
+  props: [ 'parent', 'source', 'project' ],
+  watch: {
+    // source变化时，把source中的内容全部给model
+    'source' (val) {
+      this.model = Object.assign({}, this.model, this.source)
+    }
+  },
   methods: {
     confirm () {
-      this.model.projectid = this.$state.selected.id
+      if (this.project) {
+        this.model.projectid = this.project.id
+      }
+      if (this.parent) {
+        this.model.parentid = this.parent.id
+      }
       this.$post('/rs/entity/t_task', this.model)
       this.$back()
     }

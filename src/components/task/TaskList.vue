@@ -5,16 +5,18 @@
       <button class='btn btn-primary pull-right' @click='$route("task-form")'>新增任务</button>
     </header>
     <article class='span panel-body'>
-      <criteria-paged :model="model" :pager='false' @condition-changed='search'>
-        <criteria partial='criteria'>
+        <criteria partial='criteria' @condition-changed='search'>
           <div partial>
             名称:
             <input type="text" v-model="model.name" v-on:keyup.enter="search"
             condition="name like '{}%'" defaultvalue="'13'">
+            项目:
+            <input type="text" v-model="model.project" v-on:keyup.enter="search"
+            condition="project.name like '{}%'" defaultvalue="'13'">
             <button v-on:click="search()">查询</button>
           </div>
         </criteria>
-        <grid-tree :model="model.rows" url='rs/sql/subtask.sql' partial='list'>
+        <grid-tree :model="model.rows" url='rs/sql/subtask.sql' partial='list' v-ref:tree>
           <template partial='head'>
             <tr>
               <th>名称</th>
@@ -33,7 +35,6 @@
             </td>
           </template>
           <span partial>{{row.name}}</span>
-        </grid-tree>
       </criteria-paged>
     </article>
     <footer class='panel-footer'>
@@ -52,9 +53,20 @@ export default {
       model: new TreeList('/rs/sql/task.sql')
     }
   },
+  props: [ 'project' ],
+  computed: {
+    selected () {
+      return this.$refs.tree.selected
+    }
+  },
   methods: {
     search (args) {
-      this.model.search(args.condition, {projectid: this.$state.selected.id})
+      let cond = {}
+      // 存在项目，只查本项目的
+      if (this.project) {
+        cond.projectid = this.project.id
+      }
+      this.model.search(args.condition, cond)
     }
   }
 }
