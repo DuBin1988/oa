@@ -1,27 +1,27 @@
 <template>
   <div class='flex panel panel-primary'>
-    <header class="panel-heading">
-      <span class="h3 panel-title">项目树</span>
-      <button class='btn btn-primary pull-right' @click="$route('project-form')">新增项目</button>
-    </header>
+    <button class='btn btn-primary pull-right' @click="$route('project-form')">新项目</button>
     <article class='span panel-body'>
-      <criteria partial='criteria' @condition-changed='search'>
-        <div novalidate class="form-inline auto" partial>
-          <div class="form-group">
-            <label class="sr-only" for="ProjectName">项目名称</label>
-            <input type="text" class="form-control" id="ProjectName" placeholder="请输入项目名称"
-              v-model="model.name" v-on:keyup.enter="search"
-              condition="name like '{}%'" defaultvalue="'13'">
+      <criteria-paged :model='model' @condition-changed='search' :pager='false' v-ref:paged>
+        <criteria partial='criteria'>
+          <div novalidate class="form-inline auto" partial>
+            <div class="form-group">
+              <label class="sr-only" for="ProjectName">项目名称</label>
+              <input type="text" class="form-control" id="ProjectName" placeholder="请输入项目名称"
+                v-model="model.name" v-on:keyup.enter="search"
+                condition="name like '{}%'" defaultvalue="'13'">
+            </div>
+            <button class="btn btn-default" @click="search()">查询</button>
           </div>
-          <button class="btn btn-default" @click="search()">查询</button>
-        </div>
-      </criteria>
-      <tree :model="model.rows" url='rs/sql/subproject.sql' partial="list" v-ref:tree>
-        <span partial>
-          {{ row.name }}
-          <button class="badge pull-right" v-if='isSelected(row)' @click='remove("rs/entity/t_project", row)'>x</button>
-        </span>
-      </tree>
+        </criteria>
+        <tree :model="model.rows" url='rs/sql/subproject.sql' partial="list" v-ref:tree>
+          <span partial>
+            {{ row.name }}
+            <button class="badge pull-right" v-if='isSelected(row)' @click='remove("rs/entity/t_project", row)'>x</button>
+            <button class="badge pull-right" v-if='isSelected(row)' @click='$route("project-form", {parent: row})'>子项目</button>
+          </span>
+        </tree>
+      </criteria-paged>
     </article>
     <footer class='panel-footer'>
       共{{model.rows.length}}项
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     selected () {
-      return this.$refs.tree.selected
+      return this.$refs.paged.$refs.tree.selected
     }
   },
   methods: {

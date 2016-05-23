@@ -13,6 +13,8 @@ Vue.component('project', (resolve) => { require(['./components/project/Project']
 Vue.component('project-form', (resolve) => { require(['./components/project/ProjectForm'], resolve) })
 
 // task
+Vue.component('task', (resolve) => { require(['./components/task/Task'], resolve) })
+Vue.component('task-form', (resolve) => { require(['./components/task/TaskForm'], resolve) })
 Vue.component('task-list', (resolve) => { require(['./components/task/TaskList'], resolve) })
 Vue.component('dispatch-form', (resolve) => { require(['./components/task/DispatchForm'], resolve) })
 

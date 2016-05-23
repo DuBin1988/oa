@@ -1,5 +1,7 @@
 <template>
   <div>
+    <p v-if='project'>项目名称：{{project.name}}</p>
+    <p v-if='parent'>父任务：{{parent.name}}</p>
     <validator name='v'>
       <form novalidate>
         <div class="form-group">
@@ -41,6 +43,7 @@
 import datepicker from 'vue-strap/src/datepicker'
 
 export default {
+  title: '任务编写',
   data () {
     return {
       model: {}
@@ -60,6 +63,10 @@ export default {
       }
       if (this.parent) {
         this.model.parentid = this.parent.id
+      }
+      // 没有source，说明时新增，状态为登记
+      if (!this.source) {
+        this.model.f_state = '登记'
       }
       this.$post('/rs/entity/t_task', this.model)
       this.$back()

@@ -46,7 +46,7 @@
         model: {}
       }
     },
-    props: [ 'task' ],
+    props: ['task'],
     methods: {
       confirm () {
         this.model.taskid = this.task.id
@@ -54,6 +54,7 @@
         this.$post('/rs/entity/t_taskdispatch', this.model)
         // 项目对象相关内容变更
         Object.assign(this.task, {
+          f_state: '已派',
           way: this.model.way,
           actor: this.model.actor,
           musttime: this.model.musttime

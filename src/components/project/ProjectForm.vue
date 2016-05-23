@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p v-if='parent'>{{parent.name}}</p>
     <validator name='v'>
       <form novalidate>
         <div>
@@ -24,6 +25,7 @@ let saveGen = function * (self) {
   }
   yield self.$post('/rs/entity/t_project', self.model)
   // 通知项目保存成功。
+  self.$back()
 }
 
 export default {
