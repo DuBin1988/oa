@@ -17,6 +17,7 @@ Vue.component('task', (resolve) => { require(['./components/task/Task'], resolve
 Vue.component('task-form', (resolve) => { require(['./components/task/TaskForm'], resolve) })
 Vue.component('task-list', (resolve) => { require(['./components/task/TaskList'], resolve) })
 Vue.component('dispatch-form', (resolve) => { require(['./components/task/DispatchForm'], resolve) })
+Vue.component('dispatch-list', (resolve) => { require(['./components/task/DispatchList'], resolve) })
 
 /* eslint-disable no-new */
 new Vue({

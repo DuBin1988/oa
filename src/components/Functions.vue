@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button @click="$route('project', {}, false)">项目管理</button>
-    <button @click="$route('task-list', {}, false)">任务管理</button>
+    <button @click="$goto('project', {}, false)">项目管理</button>
+    <button @click="$goto('task-list', {}, false)">任务管理</button>
   </div>
 </template>
 

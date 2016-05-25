@@ -1,33 +1,26 @@
 <template>
-  <div>
-    <div class='container'>
-      <div class="row">
-        <button @click='$back()'>返回</button>
-        <div v-if='task' class="col-md-4">
-          <p>名称：{{task.name}}</p>
-          <p>状态：{{task.f_state}}</p>
-          <p>方案：{{task.way}}</p>
-          <p>执行人：{{task.actor}}</p>
-          <p>要求时间：{{task.musttime}}</p>
-        </div>
-        <div class="col-md-8">
-          <tabset>
-            <tab v-if='task && task.f_state !== "登记"' header='派发过程'>
-              <dispatch-list :task='task'></dispatch-list>
-            </tab>
-          </tabset>
-        </div>
-      </div>
+  <!--flex-->
+  <div class='flex-row'>
+    <!--left-->
+    <div v-if='task'>
+      <button @click='$back()'>返回</button>
+      <p>名称：{{task.f_name}}</p>
+      <p>状态：{{task.f_state}}</p>
+      <p>内容：{{task.f_content}}</p>
+      <p>方案：{{task.f_way}}</p>
+      <p>执行人：{{task.f_actor}}</p>
+      <p>要求时间：{{task.f_musttime}}</p>
+    </div>
+    <!--main-->
+    <div class='span-row'>
+      <dispatch-list v-if='task && task.f_state !== "登记"' :task='task'></dispatch-list>
     </div>
   </div>
 </template>
 
 <script>
-import DispatchList from './DispatchList'
-
 export default {
   title: '任务查看',
-  props: ['task'],
-  components: { DispatchList }
+  props: ['task']
 }
 </script>

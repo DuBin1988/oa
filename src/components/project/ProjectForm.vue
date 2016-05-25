@@ -1,12 +1,12 @@
 <template>
   <div>
-    <p v-if='parent'>{{parent.name}}</p>
+    <p v-if='parent'>{{parent.f_name}}</p>
     <validator name='v'>
       <form novalidate>
         <div>
           名称:
-          <input type="text" v-model="model.name" v-validate:name='{ required: true }'>
-          <span v-if="$v.name.required">不能为空</span>
+          <input type="text" v-model="model.f_name" v-validate:f_name='{ required: true }'>
+          <span v-if="$v.f_name.required">不能为空</span>
         </div>
       </form>
       <button v-if='$v.valid' @click="confirm()">保存</button>
@@ -21,7 +21,7 @@ import co from 'co'
 let saveGen = function * (self) {
   // 如果有parent参数，把parent的id号放到model里
   if (self.parent) {
-    self.model.parentid = self.parent.id
+    self.model.f_parentid = self.parent.id
   }
   yield self.$post('/rs/entity/t_project', self.model)
   // 通知项目保存成功。
